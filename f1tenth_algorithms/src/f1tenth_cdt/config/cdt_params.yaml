@@ -1,0 +1,15 @@
+cdt_planner:
+  ros__parameters:
+    map_resolution: 0.05
+    map_width: 20.0
+    map_height: 20.0
+    robot_radius: 0.2
+    safety_margin: 0.3
+    lookahead_distance: 1.0
+    max_speed: 4.0
+    goal_reached_threshold: 0.5
+    # F1TENTH topic names
+    scan_topic: "/scan"  # LIDAR scan topic
+    odom_topic: "/ego_racecar/odom"  # Odometry topic
+    drive_topic: "/drive"  # Drive command topic
+    goal_topic: "/goal_pose"  # Goal pose topic

@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  algorithm:
+    build: .
+    container_name: f1tenth_algorithms
+    networks:
+      - f1tenth_network
+    volumes:
+      - ./src:/root/algorithm_ws/src
+    environment:
+      - DISPLAY
+    command: bash -c "cd /root/algorithm_ws && colcon build --symlink-install && source install/setup.bash && bash"
+    tty: true
+    stdin_open: true
+    # Add this to ensure the container keeps running
+    # restart: unless-stopped
+
+networks:
+  f1tenth_network:
+    external: true

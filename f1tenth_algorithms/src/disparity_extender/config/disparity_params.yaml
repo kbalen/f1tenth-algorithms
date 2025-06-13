@@ -1,0 +1,15 @@
+disparity_extender_racer:
+  ros__parameters:
+    # 🏆 CHAMPIONSHIP CAR SPECIFICATIONS
+    car_width: 0.31              # F1TENTH car width (meters)
+    wheelbase: 0.33              # Car wheelbase length  
+    safety_margin: 0.05          # Extra safety buffer (small for speed)
+    
+    # 🔍 DISPARITY DETECTION
+    disparity_threshold: 0.3     # Minimum jump to detect disparity (meters)
+    
+    # ⚡ CHAMPIONSHIP SPEED SETTINGS
+    max_speed: 7.0               # Maximum racing speed
+    min_speed: 1.0               # Minimum speed
+    brake_distance: 0.5          # Start braking distance
+    full_speed_distance: 3.0     # Full speed threshold

@@ -1,0 +1,44 @@
+FROM ros:foxy
+
+# Install necessary dependencies
+RUN apt-get update && apt-get install -y \
+    python3-pip \
+    python3-colcon-common-extensions \
+    python3-rosdep \
+    python3-vcstool \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python packages for algorithm development
+RUN pip3 install numpy scipy matplotlib
+
+# Create workspace
+RUN mkdir -p /root/algorithm_ws/src
+
+# Set up workspace
+WORKDIR /root/algorithm_ws
+RUN colcon build --symlink-install
+
+# Source the workspace in .bashrc
+RUN echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
+RUN echo "source /root/algorithm_ws/install/setup.bash" >> ~/.bashrc
+
+# Install additional dependencies for CDT planner
+RUN apt-get update && apt-get install -y \
+    ros-foxy-ackermann-msgs \
+    ros-foxy-geometry-msgs \
+    ros-foxy-nav-msgs \
+    ros-foxy-sensor-msgs \
+    ros-foxy-visualization-msgs \
+    python3-shapely \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Triangle library
+RUN pip3 install triangle
+
+# Set up entrypoint
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["bash"]
